@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useState } from "react";
 import Markdown from "react-markdown";
 
-function ProjectImage({ src, alt }: { src: string; alt: string }) {
+function ProjectImage({ src, alt, fit = "cover" }: { src: string; alt: string; fit?: "cover" | "contain" }) {
   const [imageError, setImageError] = useState(false);
 
   if (!src || imageError) {
@@ -19,7 +19,7 @@ function ProjectImage({ src, alt }: { src: string; alt: string }) {
     <img
       src={src}
       alt={alt}
-      className="w-full h-48 object-cover"
+      className={cn("w-full h-48", fit === "contain" ? "object-contain bg-[#111b25]" : "object-cover")}
       onError={() => setImageError(true)}
     />
   );
@@ -33,6 +33,7 @@ interface Props {
   tags: readonly string[];
   link?: string;
   image?: string;
+  imageFit?: "cover" | "contain";
   video?: string;
   links?: readonly {
     icon: React.ReactNode;
@@ -50,6 +51,7 @@ export function ProjectCard({
   tags,
   link,
   image,
+  imageFit,
   video,
   links,
   className,
@@ -64,8 +66,6 @@ export function ProjectCard({
       <div className="relative shrink-0">
         <Link
           href={href || "#"}
-          target="_blank"
-          rel="noopener noreferrer"
           className="block"
         >
           {video ? (
@@ -78,7 +78,7 @@ export function ProjectCard({
               className="w-full h-48 object-cover"
             />
           ) : image ? (
-            <ProjectImage src={image} alt={title} />
+            <ProjectImage src={image} alt={title} fit={imageFit} />
           ) : (
             <div className="w-full h-48 bg-muted" />
           )}
@@ -108,15 +108,17 @@ export function ProjectCard({
       <div className="p-6 flex flex-col gap-3 flex-1">
         <div className="flex items-start justify-between gap-2">
           <div className="flex flex-col gap-1">
-            <h3 className="font-semibold">{title}</h3>
+            <h3 className="font-semibold">
+              <Link href={href || "#"} className="hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm">
+                {title}
+              </Link>
+            </h3>
             <time className="text-xs text-muted-foreground">{dates}</time>
           </div>
           <Link
             href={href || "#"}
-            target="_blank"
-            rel="noopener noreferrer"
             className="text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
-            aria-label={`Open ${title}`}
+            aria-label={`View details for ${title}`}
           >
             <ArrowUpRight className="h-4 w-4" aria-hidden />
           </Link>

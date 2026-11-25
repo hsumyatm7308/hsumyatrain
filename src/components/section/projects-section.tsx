@@ -1,10 +1,13 @@
 import BlurFade from "@/components/magicui/blur-fade";
 import { ProjectCard } from "@/components/project-card";
 import { DATA } from "@/data/resume";
+import Link from "next/link";
 
 const BLUR_FADE_DELAY = 0.04;
 
 export default function ProjectsSection() {
+    const featuredProjects = DATA.projects.slice(0, 4);
+
     return (
         <section id="projects">
             <div className="flex min-h-0 flex-col gap-y-8">
@@ -23,35 +26,36 @@ export default function ProjectsSection() {
                         />
                     </div>
                     <div className="flex flex-col gap-y-3 items-center justify-center">
-                        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Check out my latest work</h2>
+                        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Check out my work</h2>
                         <p className="text-muted-foreground md:text-lg/relaxed lg:text-base/relaxed xl:text-lg/relaxed text-balance text-center">
-                            I&apos;ve worked on a variety of projects, from simple
-                            websites to complex web applications. Here are a few of my
-                            favorites.
+                            Here are some projects I&apos;ve worked on.
                         </p>
                     </div>
                 </div>
-                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 max-w-[800px] mx-auto auto-rows-fr">
-                    {DATA.projects.map((project, id) => (
+                <div className="grid w-full grid-cols-1 gap-3 sm:grid-cols-2 max-w-[800px] mx-auto auto-rows-fr">
+                    {featuredProjects.map((project, id) => (
                         <BlurFade
-                            key={project.title}
+                            key={project.slug}
                             delay={BLUR_FADE_DELAY * 12 + id * 0.05}
                             className="h-full"
                         >
                             <ProjectCard
-                                href={project.href}
-                                key={project.title}
+                                href={`/projects/${project.slug}`}
                                 title={project.title}
                                 description={project.description}
                                 dates={project.dates}
                                 tags={project.technologies}
                                 image={project.image}
+                                imageFit={"imageFit" in project && project.imageFit === "contain" ? "contain" : undefined}
                                 video={project.video}
                                 links={project.links}
                             />
                         </BlurFade>
                     ))}
                 </div>
+                <Link href="/projects" className="self-center rounded-lg border border-border px-4 py-2 text-sm font-medium hover:bg-accent/50 transition-colors">
+                    View all projects
+                </Link>
             </div>
         </section>
     );

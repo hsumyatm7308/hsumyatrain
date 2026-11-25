@@ -38,3 +38,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .content-collections
+
+# Local original video, retained outside the Git repository
+/local-assets/

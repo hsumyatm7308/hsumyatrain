@@ -1,10 +1,23 @@
-import { GlobeIcon, MailIcon } from "lucide-react";
+import { GlobeIcon, MailIcon, SmartphoneIcon } from "lucide-react";
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
 
 export const Icons = {
   globe: (props: IconProps) => <GlobeIcon {...props} />,
+  mobile: (props: IconProps) => <SmartphoneIcon {...props} />,
   email: (props: IconProps) => <MailIcon {...props} />,
+  telegrambot: (props: IconProps) => (
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <title>Telegram</title>
+      <path fill="currentColor" d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24Zm5.9 8.2-1.97 9.28c-.14.66-.54.82-1.09.51l-3-2.21-1.45 1.4c-.16.16-.3.3-.61.3l.22-3.06 5.58-5.04c.24-.22-.05-.34-.37-.12L8.3 13.61l-2.97-.93c-.65-.2-.66-.65.14-.96l11.62-4.48c.54-.2 1.01.13.81.96Z" />
+    </svg>
+  ),
+  facebook: (props: IconProps) => (
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <title>Facebook</title>
+      <path fill="currentColor" d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.095 10.125 24v-8.436H7.078v-3.49h3.047V9.412c0-3.025 1.792-4.696 4.533-4.696 1.313 0 2.686.236 2.686.236v2.97H15.83c-1.49 0-1.955.93-1.955 1.885v2.266h3.328l-.532 3.49h-2.796V24C19.612 23.095 24 18.1 24 12.073z" />
+    </svg>
+  ),
   linkedin: (props: IconProps) => (
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>
       <title>LinkedIn</title>

@@ -1,0 +1,62 @@
+---
+title: "What's the Difference Between Cookies and Local Storage?"
+publishedAt: "2026-May-23"
+updatedAt: "2026-May-23"
+author: "Hsu Myat Rain"
+summary: "Cookies နဲ့ localStorage တို့ ဘယ်လိုကွာခြားလဲ၊ ဘယ်လိုအသုံးပြုကြလဲ၊ security ပိုင်းမှာ ဘာတွေ သတိထားသင့်လဲဆိုတာ မျှဝေထားပါတယ်။"
+---
+
+Cookie ရော localStorage ရော နှစ်ခုစလုံးက web browser မှာ data တွေ သိမ်းတဲ့နည်းလမ်းတွေပါပဲ။ ဒါပေမယ့် သူတို့ရဲ့ လက်တွေ့ကွဲပြားချက်ကို သေချာနားလည်ဖို့ ကျွန်မ အချိန်ယူခဲ့ရပါတယ်။ သီအိုရီအရ သိပေမယ့် တကယ်သုံးတဲ့အခါ မရှင်းလင်းတာမျိုးပေါ့။
+
+မသိခဲ့တုန်းက sensitive data တွေကို localStorage ထဲ သိမ်းဖူးတာမျိုးတွေလည်း ရှိခဲ့တယ်။ ကိုယ့်လိုပဲ ရှုပ်ထွေးနေတဲ့သူတွေ ရှိနိုင်တာကြောင့် အများကြီးသိလို့ မဟုတ်ဘဲ နားလည်ထားသလောက်လေး မျှဝေပေးလိုက်ပါတယ်ဗျား။
+
+အရှင်းဆုံး ပြောရရင် **cookie** ကို browser နဲ့ server ကြား state အချက်အလက်တွေ မျှဝေဖို့ သုံးနိုင်ပြီး **localStorage** ကတော့ browser ထဲမှာ data သိမ်းဖို့ သုံးပါတယ်။
+
+## Cookie ဆိုတာ ဘာလဲ။
+
+Cookie ဆိုတာ browser ထဲမှာ သိမ်းထားတဲ့ data အသေးစားလေးတစ်ခုပါ။ ဥပမာ login ဝင်ထားတဲ့ session ကို မှတ်ထားဖို့ သုံးနိုင်ပါတယ်။ ဒါကြောင့် page တစ်ခုကနေ တစ်ခုသွားတိုင်း ထပ်ခါထပ်ခါ login ဝင်စရာ မလိုတော့ဘူးပေါ့။
+
+Browser က သက်ဆိုင်ရာ request တွေနဲ့အတူ cookie ကို server ဆီ အလိုအလျောက် ပို့ပေးနိုင်ပါတယ်။ ဒါပေမယ့် request တိုင်းနဲ့ cookie တိုင်း ပါသွားတာ မဟုတ်ပါဘူး။ Domain, path, `SameSite` နဲ့ အခြား setting တွေပေါ် မူတည်ပါတယ်။ Cookie ကြီးလာလေလေ request နဲ့အတူ ပို့ရတဲ့ data လည်း များလာနိုင်ပါတယ်။
+
+Cookie တွေကို သက်တမ်းကုန်မယ့်အချိန် သတ်မှတ်ထားနိုင်သလို browser session အတွက်ပဲ သုံးမယ့် session cookie အဖြစ်လည်း သတ်မှတ်နိုင်ပါတယ်။
+
+### HttpOnly နဲ့ XSS
+
+Cookie တစ်ခုမှာ `HttpOnly` attribute ပါရင် JavaScript ကနေ အဲဒီ cookie ကို တိုက်ရိုက်ဖတ်လို့ မရပါဘူး။ ဒါက XSS (Cross-Site Scripting) ဖြစ်တဲ့အခါ session cookie ကို JavaScript နဲ့ ခိုးယူနိုင်ခြေကို လျှော့ချပေးပါတယ်။
+
+ဒါပေမယ့် `HttpOnly` တစ်ခုတည်းနဲ့ XSS ကို အပြည့်အဝ ကာကွယ်ပေးတာ မဟုတ်ပါဘူး။ မသမာတဲ့ script က အသုံးပြုသူရဲ့ browser ကနေ authenticated request တွေ ပို့နိုင်သေးတာကြောင့် XSS ကိုယ်တိုင်ကိုလည်း ကာကွယ်ဖို့ လိုပါတယ်။
+
+### Cookie နဲ့ CSRF
+
+Browser က cookie ကို သက်ဆိုင်ရာ request တွေနဲ့ အလိုအလျောက် ပို့နိုင်တာကြောင့် CSRF (Cross-Site Request Forgery) ကိုလည်း သတိထားဖို့ လိုပါတယ်။ CSRF မှာ အခြား site တစ်ခုက အသုံးပြုသူရဲ့ browser ကို မရည်ရွယ်ထားတဲ့ request တစ်ခု ပို့မိအောင် လုပ်နိုင်ပါတယ်။
+
+`SameSite=Lax` သို့မဟုတ် `SameSite=Strict` က cross-site request အချို့မှာ cookie ပါသွားတာကို ကန့်သတ်ပြီး CSRF အန္တရာယ်ကို လျှော့ချနိုင်ပါတယ်။ ဒါပေမယ့် `SameSite` တစ်ခုတည်းကိုပဲ အားကိုးမယ့်အစား application အတွက် သင့်တော်တဲ့ CSRF ကာကွယ်မှုတွေကိုလည်း ထည့်သွင်းစဉ်းစားဖို့ လိုပါတယ်။
+
+## Local Storage ဆိုတာ ဘာလဲ။
+
+localStorage ကို browser ထဲက key-value သေတ္တာလေးတစ်ခုလို စဉ်းစားလို့ရပါတယ်။ ဥပမာ အသုံးပြုသူ ရွေးထားတဲ့ theme လို setting တွေကို သိမ်းထားနိုင်ပါတယ်။
+
+localStorage ထဲက data ကို cookie လို request တွေနဲ့အတူ server ဆီ အလိုအလျောက် မပို့ပါဘူး။ Browser ကို ပိတ်ပြီး ပြန်ဖွင့်တဲ့အခါလည်း ပုံမှန်အားဖြင့် data ဆက်ရှိနေတတ်ပေမယ့် user က ရှင်းပစ်တာ၊ browser က ဖယ်ရှားတာ၊ private browsing session ပြီးဆုံးတာမျိုးမှာ ပျောက်နိုင်ပါတယ်။
+
+### Local Storage နဲ့ XSS
+
+Website ရဲ့ JavaScript က localStorage ထဲက data ကို ဖတ်နိုင်ပါတယ်။ ဒါကြောင့် website ထဲ မသမာတဲ့ JavaScript code ဝင်လာတဲ့ XSS attack ဖြစ်ရင် အဲဒီ script က `localStorage.getItem()` နဲ့ data တွေကို ဖတ်ယူနိုင်ပါတယ်။
+
+အဲဒါကြောင့် session token လို sensitive data တွေကို localStorage ထဲ သိမ်းတဲ့အခါ XSS အန္တရာယ်ကို အထူးသတိထားဖို့ လိုပါတယ်။ Secret API key တွေကိုလည်း browser ထဲ မထည့်သင့်ပါဘူး။ Server-managed session အတွက် `HttpOnly`, `Secure` နဲ့ သင့်တော်တဲ့ `SameSite` ပါတဲ့ cookie ကို အသုံးပြုဖို့ စဉ်းစားနိုင်ပါတယ်။
+
+## ပြန်ချုပ်ကြည့်ရင်
+
+| | Cookie | localStorage |
+| --- | --- | --- |
+| Server ဆီ အလိုအလျောက် ပို့သလား | သက်ဆိုင်ရာ request တွေနဲ့ ပို့နိုင်တယ် | မပို့ပါဘူး |
+| JavaScript နဲ့ ဖတ်နိုင်သလား | `HttpOnly` ပါရင် မဖတ်နိုင်ပါဘူး | ဖတ်နိုင်ပါတယ် |
+| သက်တမ်း | Session သို့မဟုတ် သတ်မှတ်ထားတဲ့ expiry အထိ | ပုံမှန်အားဖြင့် browser ပိတ်ပြီး ပြန်ဖွင့်လည်း ရှိနေတတ်တယ် |
+| ဥပမာ | Server-managed session | Theme preference |
+
+Cookie ဖြစ်ဖြစ် localStorage ဖြစ်ဖြစ် ရွေးသုံးတဲ့အခါ data အမျိုးအစားနဲ့ ကိုယ့် application ရဲ့ security လိုအပ်ချက်ကို ကြည့်ပြီး ဆုံးဖြတ်ဖို့ အရေးကြီးပါတယ်။
+
+## ဆက်ဖတ်ရန်
+
+- [Using HTTP cookies — MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Cookies)
+- [Web Storage API — MDN](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API)
+- [Secure cookie configuration — MDN](https://developer.mozilla.org/en-US/docs/Web/Security/Practical_implementation_guides/Cookies)
