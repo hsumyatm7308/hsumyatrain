@@ -191,7 +191,7 @@ export default function Page() {
           <HackathonsSection />
         </BlurFade>
       </section>
-      <section id="contact">
+      <section id="contact" className="scroll-mt-8">
         <BlurFade delay={BLUR_FADE_DELAY * 16}>
           <ContactSection />
         </BlurFade>

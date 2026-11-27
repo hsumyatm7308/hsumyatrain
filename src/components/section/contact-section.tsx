@@ -1,43 +1,69 @@
-import Link from "next/link";
-import { FlickeringGrid } from "@/components/magicui/flickering-grid";
+import { ArrowUpRight } from "lucide-react";
 import { DATA } from "@/data/resume";
 
 export default function ContactSection() {
+  const socialLinks = [
+    DATA.contact.social.GitHub,
+    DATA.contact.social.LinkedIn,
+  ];
+
   return (
-    <div className="border rounded-xl p-10 relative">
-      <div className="absolute -top-4 border bg-primary z-10 rounded-xl px-4 py-1 left-1/2 -translate-x-1/2">
-        <span className="text-background text-sm font-medium">Contact</span>
-      </div>
-      <div className="absolute inset-0 top-0 left-0 right-0 h-1/2 rounded-xl overflow-hidden">
-        <FlickeringGrid
-          className="h-full w-full"
-          squareSize={2}
-          gridGap={2}
-          style={{
-            maskImage: "linear-gradient(to bottom, black, transparent)",
-            WebkitMaskImage: "linear-gradient(to bottom, black, transparent)",
-          }}
-        />
-      </div>
-      <div className="relative flex flex-col items-center gap-4 text-center">
-        <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-          Get in Touch
+    <div className="py-8 sm:py-10">
+      <div className="mx-auto flex max-w-lg flex-col items-center text-center">
+        <div className="mb-7 flex w-full items-center gap-3">
+          <div className="h-px flex-1 bg-border" />
+          <span className="rounded-lg bg-primary px-3 py-1 text-xs font-medium text-primary-foreground">
+            Contact
+          </span>
+          <div className="h-px flex-1 bg-border" />
+        </div>
+
+        <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+          Let&apos;s talk.
         </h2>
-        <p className="mx-auto max-w-lg text-muted-foreground text-balance">
-          Want to chat? Just shoot me a dm{" "}
-          <Link
-            href={DATA.contact.social.Facebook.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
-          >
-            on Facebook
-          </Link>{" "}
-          and I&apos;ll respond whenever I can. I will ignore all
-          soliciting.
+        <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
+          Have a question or a project in mind? Send me a message.
         </p>
+
+        <a
+          href={DATA.contact.social.Facebook.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        >
+          Message me on Facebook
+          <ArrowUpRight className="size-4" aria-hidden="true" />
+        </a>
+
+        <a
+          href={`mailto:${DATA.contact.email}`}
+          className="mt-5 break-all text-sm text-muted-foreground underline decoration-border underline-offset-4 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        >
+          {DATA.contact.email}
+        </a>
+
+        <div className="mt-6 flex items-center gap-2">
+          {socialLinks.map((social) => (
+            <a
+              key={social.name}
+              href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={social.name}
+              className="flex size-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              <social.icon className="size-4" aria-hidden="true" />
+            </a>
+          ))}
+        </div>
+
+        <a
+          href={`tel:${DATA.contact.tel}`}
+          className="mt-4 text-xs text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        >
+          {DATA.contact.tel}
+        </a>
       </div>
     </div>
   );
 }
-

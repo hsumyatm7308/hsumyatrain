@@ -1,9 +1,9 @@
 import { Icons } from "@/components/icons";
-import { FolderKanban, HomeIcon, NotebookIcon, RefreshCw } from "lucide-react";
+import { FolderKanban, HomeIcon, ImagesIcon, MailIcon, NotebookIcon, RefreshCw } from "lucide-react";
 import {
   HTMLIcon, CSSIcon, JavascriptIcon, TailwindIcon, BootstrapIcon,
   PHPIcon, LaravelIcon, JsonIcon,
-  AWSIcon, Mysql,
+  AWSIcon, Mysql, UbuntuIcon, FirebaseIcon, SupabaseIcon, PrismaIcon,
 } from "@/components/ui/svgs/skillIcons";
 import { ReactLight } from "@/components/ui/svgs/reactLight";
 import { Postgresql } from "@/components/ui/svgs/postgresql";
@@ -23,6 +23,7 @@ export const DATA = {
   avatarUrl: "/me.png",
   skills: [
     { name: "React", icon: ReactLight },
+    { name: "Typescript", icon: ReactLight },
     { name: "HTML", icon: HTMLIcon },
     { name: "CSS", icon: CSSIcon },
     { name: "Javascript", icon: JavascriptIcon },
@@ -33,9 +34,13 @@ export const DATA = {
     { name: "PHP", icon: PHPIcon },
     { name: "Laravel", icon: LaravelIcon },
     { name: "Java", icon: Java },
+    { name: "Express.js", icon: Java },
     { name: "AJAX", icon: RefreshCw },
     { name: "JSON", icon: JsonIcon },
-    { name: "Linux (Basic)", icon: JsonIcon },
+    { name: "Ubuntu (Basic)", icon: UbuntuIcon },
+    { name: "Firebase", icon: FirebaseIcon },
+    { name: "Supabase", icon: SupabaseIcon },
+    { name: "Prisma", icon: PrismaIcon },
     { name: "Python (Learning)", icon: Python },
     { name: "AWS (Learning)", icon: AWSIcon },
 
@@ -44,6 +49,8 @@ export const DATA = {
     { href: "/", icon: HomeIcon, label: "Home" },
     { href: "/projects", icon: FolderKanban, label: "Projects" },
     { href: "/blog", icon: NotebookIcon, label: "Blog" },
+    { href: "/gallery", icon: ImagesIcon, label: "Gallery" },
+    { href: "/#contact", icon: MailIcon, label: "Contact" },
   ],
   contact: {
     email: "hsumyatm7308@gmail.com",
@@ -53,7 +60,7 @@ export const DATA = {
         name: "GitHub",
         url: "https://github.com/hsumyatm7308",
         icon: Icons.github,
-        navbar: true,
+        contact: true,
       },
 
       LinkedIn: {
@@ -61,27 +68,27 @@ export const DATA = {
         url: "https://www.linkedin.com/in/hsumyatmoe04/",
         icon: Icons.linkedin,
 
-        navbar: true,
+        contact: true,
       },
       Facebook: {
         name: "Facebook",
         url: "https://www.facebook.com/jv230",
         icon: Icons.facebook,
 
-        navbar: true,
+        contact: true,
       },
       Youtube: {
         name: "Youtube",
         url: "https://dub.sh/dillion-youtube",
         icon: Icons.youtube,
-        navbar: true,
+        contact: false,
       },
       email: {
         name: "Send Email",
         url: "#",
         icon: Icons.email,
 
-        navbar: false,
+        contact: false,
       },
     },
   },
@@ -321,6 +328,7 @@ export const DATA = {
         "Javascript",
         "AJAX",
         "PHP",
+        "MySQL",
         "AI Assistant",
         "Git"
       ],
@@ -341,13 +349,81 @@ export const DATA = {
       video: "perumdej.mp4",
     },
     {
-      slug: "integrated-project-planning",
+      slug: "zay-list",
+      detailTitle: "",
+      category: "",
+      role: "Developer",
+      status: "Built · March 2026",
+      mediaCaption: "",
+      title: "ZayList",
+      href: "https://github.com/hsumyatm7308/ZayList",
+      dates: "March 2026 - March 2026",
+      active: true,
+      description:
+        "A shared grocery app for households. Add items by voice, organize the list, shop together, and track spending with monthly and category insights.",
+      technologies: [
+        "React 18",
+        "TypeScript",
+        "Vite",
+        "Tailwind CSS",
+        "Zustand",
+        "Recharts",
+        "Capacitor",
+      ],
+      links: [
+        {
+          type: "Source",
+          href: "https://github.com/hsumyatm7308/ZayList",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "zaylist/zaylist-cover.webp",
+      video: "",
+    },
+    {
+      slug: "aura-ai",
+      detailTitle: "",
+      category: "",
+      role: "Developer",
+      status: "Built · July 17th 2025",
+      mediaCaption: "",
+      title: "Aura AI",
+      href: "https://github.com/hsumyatm7308/AURA_AI",
+      dates: "July 2026 - July 2026",
+      active: true,
+      description:
+        "An AI-powered interview and selection operations platform featuring automated candidate screening, a live AI interview assistant, and explainable evaluations.",
+      technologies: [
+        "React",
+        "Typescript",
+        "PostgreSQL",
+        "Python",
+        "Tailwind",
+      ],
+      links: [
+        {
+          type: "website",
+          href: "error page",
+          icon: <Icons.desktop className="size-3" />,
+        },
+
+        {
+          type: "Source",
+          href: "https://github.com/hsumyatm7308/AURA_AI",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
+      video: "/auraai/aura.mp4",
+    },
+    {
+      slug: "IPP",
       detailTitle: "",
       category: "",
       role: "Developer",
       status: "Built · December 2025 – February 2026",
       mediaCaption: "",
-      title: "Integrated Project Planning",
+      title: "IPP",
       href: "https://github.com/anthtooaung/IPP-System",
       dates: "Dec 2025 - Feb 2026",
       active: true,
@@ -366,7 +442,7 @@ export const DATA = {
         {
           type: "Desktop",
           href: "",
-          icon: <Icons.mobile className="size-3" />,
+          icon: <Icons.desktop className="size-3" />,
         },
 
         {

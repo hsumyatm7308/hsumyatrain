@@ -6,7 +6,9 @@ Write Markdown or MDX in that file, just like a blog post. The title, summary, d
 
 You can optionally add `detailTitle`, `category`, `role`, `status`, and `mediaCaption` to a project in `resume.tsx` to show more information on its detail page. Leave a field empty or omit it when it does not apply.
 
-To add a photo collection, use the `PhotoGallery` component as shown in `golden-promise.mdx`. Add or reorder entries in its `photos` list. Photos are displayed as compact square tiles. Keep the image files in `public` and use paths starting with `/`.
+Project memories are shared with the Gallery page. Add or reorder photos in `src/data/gallery.ts`, then use `<ProjectMemories slug="your-project-slug" />` in the project's MDX. Each collection's slug must match its project in `src/data/resume.tsx`. Photos use the same compact tiles in both places. Keep image files in `public` and use paths starting with `/`.
+
+For a standalone gallery that should only appear in one MDX page, use `<PhotoGallery photos={[{ src: "/photos/team.jpg", alt: "Our team" }]} />`.
 
 Each photo can include a `caption` for the text shown on hover or focus, for example `{ src: "/photos/team.jpg", alt: "Our team", caption: "After our final presentation" }`. If you leave it out, the image's `alt` text is shown instead.
 

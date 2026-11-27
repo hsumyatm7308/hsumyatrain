@@ -23,6 +23,10 @@ export const PHPIcon = skillIcon("php");
 export const LaravelIcon = skillIcon("laravel");
 export const JsonIcon = skillIcon("json", true);
 export const Mysql = skillIcon("mysql");
+export const UbuntuIcon = skillIcon("ubuntu");
+export const FirebaseIcon = skillIcon("firebase");
+export const SupabaseIcon = skillIcon("supabase");
+export const PrismaIcon = skillIcon("prisma");
 export function AWSIcon({ className }: SVGProps<SVGSVGElement>) {
   return <img src="/skills/aws.svg" alt="" aria-hidden="true" className={`${className ?? ""} bg-white`} />;
 }
