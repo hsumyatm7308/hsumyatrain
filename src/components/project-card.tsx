@@ -4,8 +4,59 @@
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useReducedMotion } from "motion/react";
 import Markdown from "react-markdown";
+
+function LazyProjectVideo({ src }: { src: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isNearViewport, setIsNearViewport] = useState(false);
+  const [hasEnteredViewport, setHasEnteredViewport] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsNearViewport(entry.isIntersecting);
+        if (entry.isIntersecting) setHasEnteredViewport(true);
+      },
+      { rootMargin: "180px 0px", threshold: 0.05 },
+    );
+
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (!isNearViewport || prefersReducedMotion) {
+      video.pause();
+      return;
+    }
+
+    void video.play().catch(() => {
+      // Autoplay may be blocked by browser settings; the project detail page has controls.
+    });
+  }, [isNearViewport, prefersReducedMotion, hasEnteredViewport]);
+
+  return (
+    <video
+      ref={videoRef}
+      src={hasEnteredViewport ? src : undefined}
+      muted
+      loop
+      playsInline
+      preload="none"
+      aria-hidden="true"
+      className="w-full h-48 object-cover"
+    />
+  );
+}
 
 function ProjectImage({ src, alt, fit = "cover" }: { src: string; alt: string; fit?: "cover" | "contain" }) {
   const [imageError, setImageError] = useState(false);
@@ -69,14 +120,7 @@ export function ProjectCard({
       />
       <div className="relative shrink-0">
         {video ? (
-          <video
-            src={video}
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-48 object-cover"
-          />
+          <LazyProjectVideo src={video} />
         ) : image ? (
           <ProjectImage src={image} alt={title} fit={imageFit} />
         ) : (
